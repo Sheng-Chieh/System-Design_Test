@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系統註冊</title>
+    <style>
+        /* 沿用原本 login.html 的基礎設定與樣式 */
+        body, html { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; height: 100vh; background-color: #ffffff; color: #212529; }
+        .split-container { display: flex; height: 100vh; width: 100%; }
+        .left-panel { flex: 0 0 45%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; box-sizing: border-box; background-color: #ffffff; }
+        .auth-card { width: 100%; max-width: 380px; }
+        .brand-logo { font-size: 24px; font-weight: 800; margin-bottom: 40px; color: #000; display: flex; align-items: center; gap: 10px; }
+        .brand-logo .dot { width: 12px; height: 12px; background-color: #007bff; border-radius: 50%; display: inline-block; }
+        .auth-title { margin: 0 0 8px 0; font-size: 32px; font-weight: 700; color: #111827; }
+        .auth-subtitle { margin: 0 0 30px 0; font-size: 15px; color: #6b7280; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 500; color: #374151; }
+        .auth-input { width: 100%; padding: 12px 15px; border: 1px solid #d1d5db; border-radius: 8px; box-sizing: border-box; font-size: 15px; transition: all 0.2s ease; }
+        .auth-input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15); }
+        .auth-button { width: 100%; padding: 14px; background-color: #28a745; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2); margin-top: 10px; }
+        .auth-button:hover { background-color: #218838; transform: translateY(-2px); }
+        .signup-group { text-align: center; margin-top: 30px; font-size: 14px; color: #6b7280; }
+        .signup-link { color: #007bff; text-decoration: none; font-weight: 600; }
+        .signup-link:hover { text-decoration: underline; }
+        .error-message { color: #dc2626; background-color: #fee2e2; border: 1px solid #fca5a5; border-radius: 8px; padding: 12px; font-size: 14px; margin-bottom: 20px; text-align: center; }
+        .right-panel { flex: 1; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://zeenea.com/wp-content/uploads/2023/01/databases-zeenea.jpg'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px; color: white; text-align: center; }
+        .intro-title { font-size: 36px; font-weight: 700; margin-bottom: 20px; line-height: 1.3; }
+        .intro-text { font-size: 16px; color: #e5e7eb; line-height: 1.6; max-width: 500px; }
+        @media (max-width: 900px) { .right-panel { display: none; } .left-panel { flex: 1; } }
+    </style>
+</head>
+<body>
+<div class="split-container">
+    <div class="left-panel">
+        <div class="auth-card">
+            <div class="brand-logo"><span class="dot"></span> YourLogo</div>
+            <h1 class="auth-title">Create an account</h1>
+            <p class="auth-subtitle">Join us and start managing your databases.</p>
+            
+            {% if error_message %}
+                <div class="error-message">{{ error_message }}</div>
+            {% endif %}
+
+            <form method="POST" action="/signup/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="auth-input" required placeholder="Choose a username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" class="auth-input" required placeholder="Create a password">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" id="confirm_password" name="confirm_password" class="auth-input" required placeholder="Confirm your password">
+                </div>
+                
+                <button type="submit" class="auth-button">Sign up</button>
+
+                <div class="signup-group">
+                    <p>Already have an account? <a href="/login/" class="signup-link">Sign in here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="right-panel">
+        <div class="intro-content">
+            <h2 class="intro-title">Join Our Platform</h2>
+            <p class="intro-text">
+                註冊以體驗完整的資料庫管理系統 (DBMS) 功能。
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
