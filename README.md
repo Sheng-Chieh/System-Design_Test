@@ -1,7 +1,7 @@
 # Web Test
 
 ## 專案簡介
-本專案是一個基於 Django (版本 6.0.2) 建立的 Web 測試應用程式。
+本專案是一個基於 Django 建立的 Web 測試。
 
 ## 系統環境與依賴
 - **程式語言**: Python 3.x
@@ -9,7 +9,7 @@
 - **資料庫系統**: MySQL
 
 ## 主要功能
-- **使用者登入 (`/login/`)**: 提供左右分欄設計的登入介面，後端透過 Raw SQL 查詢與資料庫進行帳號及密碼的比對驗證。
+- **使用者登入 (`/login/`)**: 提供左右分欄設計的登入介面，後端透過 SQL 查詢與資料庫進行帳號及密碼的比對驗證。
 - **狀態管理**: 登入成功後，系統會將使用者帳號寫入 Cookie 中 (有效期限設定為 1 小時)，藉此維持使用者的登入狀態。
 - **歡迎頁面 (`/function1/`)**: 登入成功後會跳轉至此頁面，顯示當前時間與歡迎訊息；若未登入則會自動將使用者導向登入頁面。
 
@@ -37,4 +37,26 @@ CREATE TABLE users (
 );
 
 -- 3. 新增一筆測試帳號供登入使用
-INSERT INTO users (username, password) VALUES ('testuser', 'testpass');
+INSERT INTO users (username, password) VALUES ('testuser', 0000);
+```
+## 安裝與執行步驟
+
+1. **安裝所需的 Python 套件**
+   請確保已安裝 Django 與連接 MySQL 的資料庫端套件：
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **進入專案目錄**
+   ```bash
+   cd web_test
+   ```
+
+3. **啟動 Django 開發伺服器**
+   ```bash
+   python manage.py runserver
+   ```
+
+4. **瀏覽網站**
+   * 登入頁面：[http://127.0.0.1:8000/login/](http://127.0.0.1:8000/login/)
+   * 歡迎頁面：[http://127.0.0.1:8000/function1/](http://127.0.0.1:8000/function1/)
