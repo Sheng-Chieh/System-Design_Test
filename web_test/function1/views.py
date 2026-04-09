@@ -39,3 +39,10 @@ def hello_world(request):
         'current_time': current_time, 
         'username': username
     })
+
+def user_logout(request):
+    # 建立一個跳轉回登入頁面的回應物件
+    response = redirect('/login/')
+    # 刪除記錄登入狀態的 Cookie
+    response.delete_cookie('username')
+    return response

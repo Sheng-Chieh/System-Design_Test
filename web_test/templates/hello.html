@@ -1,23 +1,217 @@
 <!-- HelloDjango.html -->
 <!DOCTYPE html>
-<html>
-
+<html lang="zh-Hant">
 <head>
-    <title>This is my first template!!</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎回來 - 系統首頁</title>
     <style>
-        body {
-            background-color: rgb(82, 78, 85);
+        /* 基礎設定 (沿用 login 介面風格) */
+        body, html {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #f3f4f6; /* 改用極淺灰背景，凸顯白色內容卡片 */
+            color: #212529;
         }
 
-        em {
-            color: rgb(32, 178, 117);
+        /* --- 頂部導覽列 --- */
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
+
+        /* 沿用 login 的 Logo 設計 */
+        .brand-logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .brand-logo .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #007bff;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: #007bff;
+        }
+
+        /* --- 主要內容區塊 --- */
+        .main-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 歡迎卡片 */
+        .welcome-card {
+            background-color: #ffffff;
+            width: 100%;
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        /* 標題與副標 (沿用 login 的 auth-title 風格) */
+        .welcome-title {
+            margin: 0 0 10px 0;
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .welcome-subtitle {
+            margin: 0 0 30px 0;
+            font-size: 16px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* 時間顯示區塊設計 */
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: rgba(0, 123, 255, 0.1);
+            color: #007bff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        /* 保留 Django Template 變數 */
+        .time-badge em {
+            font-style: normal;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* 沿用 login 的按鈕特效 */
+        .action-button {
+            padding: 14px 30px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.2);
+            display: inline-block;
+        }
+
+        .action-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 7px 14px rgba(0, 123, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .action-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+        }
+
+        /* 次要按鈕 */
+        .secondary-button {
+            padding: 14px 30px;
+            background-color: transparent;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background-color: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        /* 按鈕群組 */
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
     </style>
 </head>
-
 <body>
-    <h1>Hello!</h1>
-    <em>{{ current_time }}</em>
-</body>
 
+    <!-- 頂部導覽列 -->
+    <header class="navbar">
+        <a href="#" class="brand-logo">
+            <span class="dot"></span> YourLogo
+        </a>
+        <nav class="nav-links">
+            <a href="#" class="nav-link">個人資料</a>
+            <a href="#" class="nav-link">設定</a>
+            <a href="/logout/" class="nav-link" style="color: #dc2626;">登出</a>
+        </nav>
+    </header>
+
+    <!-- 主要內容區 -->
+    <main class="main-container">
+        <div class="welcome-card">
+            
+            <h1 class="welcome-title">Hello! 歡迎回來 🎉</h1>
+            <p class="welcome-subtitle">
+                您已經成功登入系統。<br>
+                這是一個資料庫管理系統 (DBMS) 的專案展示，您可以在這裡開始進行各項管理操作。
+            </p>
+
+            <!-- 重新設計的 Django Time 變數顯示 -->
+            <div class="time-badge">
+                <span>系統目前時間：</span>
+                <em>{{ current_time }}</em>
+            </div>
+
+            <!-- 操作按鈕區 -->
+            <div class="button-group">
+                <a href="#" class="secondary-button">查看使用教學</a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
 </html>
